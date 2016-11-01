@@ -7,8 +7,8 @@ import {
   Image,
   StyleSheet,
   NavigatorIOS,
-  ActivityIndicator
 } from 'react-native';
+import Profile from './Profile.js';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,7 +45,12 @@ export default class Dashboard extends Component {
   }
 
   goToProfile() {
-    console.log('profile func');
+    let userInfo = this.props.userInfo;
+    this.props.navigator.push({
+      title: 'Profile Page',
+      component: Profile,
+      passProps: { userInfo }
+    })
   }
 
   goToRepos() {
