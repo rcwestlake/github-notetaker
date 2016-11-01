@@ -8,6 +8,8 @@ import {
   NavigatorIOS,
   ActivityIndicatorIOS
 } from 'react-native';
+import api from '../Utils/api.js';
+import Dashboard from './Dashboard.js'
 
 var styles = StyleSheet.create({
   mainContainer: {
@@ -74,6 +76,26 @@ export default class Main extends Component {
       isLoading: true
     })
     console.log('SUBMIT', this.state.username);
+    api.getBio(this.state.username)
+      .then((res) => {
+        if(res.message === 'Not Found') {
+          this.setState({
+            error: 'User not found',
+            isLoading: false
+          })
+        } else {
+          this.props.navigator.push({
+            title: res.name || 'Select an Option',
+            component: Dashboard,
+            passProps: { userInfo: res }
+          });
+          this.setState({
+            username: '',
+            isLoading: false,
+            error: false
+          })
+        }
+      })
   }
 
   render() {
