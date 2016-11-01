@@ -6,18 +6,30 @@ import {
   TouchableHighlight,
   StyleSheet,
   NavigatorIOS,
-  ActivityIndicatorIOS
+  ActivityIndicator
 } from 'react-native';
 
 const styles = StyleSheet.create({
-
-})
+  container: {
+    marginTop: 65,
+    flex: 1
+  },
+  image: {
+    height: 350,
+  },
+  buttonText: {
+    fontSize: 24,
+    color: 'white',
+    alignSelf: 'center'
+  }
+});
 
 export default class Dashboard extends Component {
   render() {
     return (
-      <View>
-      <Text> testing Dashboard comp</Text>
+      <View style={styles.container}>
+        <Text> testing Dashboard comp</Text>
+        <Text> {JSON.stringify(this.props.userInfo)} </Text>
       </View>
     );
   }

@@ -6,7 +6,7 @@ import {
   TouchableHighlight,
   StyleSheet,
   NavigatorIOS,
-  ActivityIndicatorIOS
+  ActivityIndicator
 } from 'react-native';
 import api from '../Utils/api.js';
 import Dashboard from './Dashboard.js'
@@ -99,6 +99,9 @@ export default class Main extends Component {
   }
 
   render() {
+    let userErr = (
+      this.state.error ? <Text> {this.state.error} </Text> : <View></View>
+    )
     return (
       <View style={styles.mainContainer}>
         <Text style={styles.title}>Search for a Github user</Text>
@@ -112,7 +115,12 @@ export default class Main extends Component {
           onPress={() => this.handleSubmit()}
           underlayColor="white">
             <Text style={styles.buttonText}>SEARCH</Text>
-          </TouchableHighlight>
+        </TouchableHighlight>
+        <ActivityIndicator
+          animating={this.state.isLoading}
+          color='#111111'
+          size='large'></ActivityIndicator>
+        {userErr}
       </View>
     )
   }
