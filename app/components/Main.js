@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, NavigatorIOS } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  StyleSheet,
+  NavigatorIOS,
+  ActivityIndicatorIOS
+} from 'react-native';
 
 var styles = StyleSheet.create({
   mainContainer: {
@@ -45,13 +53,44 @@ var styles = StyleSheet.create({
   },
 });
 
-export default class Main extends React.Component {
+export default class Main extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      isLoading: false
+    }
+  }
+
+  handleChange(event) {
+    this.setState({
+      username: event.nativeEvent.text
+    })
+  }
+
+  handleSubmit() {
+    this.setState({
+      isLoading: true
+    })
+    console.log('SUBMIT', this.state.username);
+  }
+
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text>
-          testing router
-        </Text>
+        <Text style={styles.title}>Search for a Github user</Text>
+        <TextInput
+          style={styles.searchInput}
+          value={this.state.username}
+          onChange={(event) => this.handleChange(event)}
+          />
+        <TouchableHighlight
+          style={styles.button}
+          onPress={() => this.handleSubmit()}
+          underlayColor="white">
+            <Text style={styles.buttonText}>SEARCH</Text>
+          </TouchableHighlight>
       </View>
     )
   }
