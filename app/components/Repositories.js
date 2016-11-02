@@ -52,6 +52,7 @@ export default class Repositories extends Component {
               <Text style={styles.name}> {repos[index].name} </Text>
             </TouchableHighlight>
             <Text style={styles.starts}> {repos[index].stargazer_count} </Text>
+            {desc}
           </View>
           <Separator />
         </View>

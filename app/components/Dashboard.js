@@ -9,6 +9,8 @@ import {
   NavigatorIOS,
 } from 'react-native';
 import Profile from './Profile.js';
+import Repositories from './Repositories.js';
+import api from '../Utils/api.js';
 
 const styles = StyleSheet.create({
   container: {
@@ -50,11 +52,22 @@ export default class Dashboard extends Component {
       title: 'Profile Page',
       component: Profile,
       passProps: { userInfo }
-    })
+    });
   }
 
   goToRepos() {
-    console.log('repos func');
+    let userInfo = this.props.userInfo;
+    api.getRepos(userInfo.login)
+      .then((res) => {
+        this.props.navigator.push({
+          title: 'Repos',
+          component: Repositories,
+          passProps: {
+          userInfo: userInfo,
+          repos: res
+        }
+      });
+    });
   }
 
   goToNotes() {
