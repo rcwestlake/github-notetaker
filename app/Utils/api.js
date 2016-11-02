@@ -16,12 +16,12 @@ export default api = {
     return fetch(url).then((res) => res.json());
   },
 
-  addNote(username, note) {
+  addNote(username, note){
     username = username.toLowerCase().trim();
     let url = `https://githubnotetaker-b3939.firebaseio.com/${username}.json`
-    return fetch(username, {
+    return fetch(url, {
       method: 'post',
       body: JSON.stringify(note)
     }).then((res) => res.json());
   }
-}
+};

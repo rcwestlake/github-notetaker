@@ -75,7 +75,6 @@ export default class Main extends Component {
     this.setState({
       isLoading: true
     })
-    console.log('SUBMIT', this.state.username);
     api.getBio(this.state.username)
       .then((res) => {
         if(res.message === 'Not Found') {

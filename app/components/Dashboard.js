@@ -11,6 +11,7 @@ import {
 import Profile from './Profile.js';
 import Repositories from './Repositories.js';
 import api from '../Utils/api.js';
+import Notes from './Notes';
 
 const styles = StyleSheet.create({
   container: {
@@ -70,9 +71,21 @@ export default class Dashboard extends Component {
     });
   }
 
-  goToNotes() {
-    console.log('notes func');
-  }
+  goToNotes(){
+   api.getNotes(this.props.userInfo.login)
+     .then((jsonRes) => {
+       jsonRes = jsonRes || {};
+       console.log(jsonRes);
+       this.props.navigator.push({
+         component: Notes,
+         title: 'Notes',
+         passProps: {
+           notes: jsonRes,
+           userInfo: this.props.userInfo
+         }
+       });
+     });
+   }
 
   render() {
     return (
