@@ -43,15 +43,16 @@ export default class Repositories extends Component {
     let repos = this.props.repos;
     let list = repos.map((item, index) => {
       let desc = repos[index].description ? <Text style={styles.description}> {repos[index].description} </Text> : <View />
+      console.log(repos[index].stargazer_count);
       return (
         <View key={index}>
           <View style={styles.rowContainer}>
             <TouchableHighlight
-              onPress={() => openPage(repos[index].html_url)}
+              onPress={() => this.openPage(repos[index].html_url)}
               underlayColor='transparent'>
               <Text style={styles.name}> {repos[index].name} </Text>
             </TouchableHighlight>
-            <Text style={styles.starts}> {repos[index].stargazer_count} </Text>
+            <Text style={styles.stars}> Stars: {repos[index].stargazers_count} </Text>
             {desc}
           </View>
           <Separator />
